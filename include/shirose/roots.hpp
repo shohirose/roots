@@ -23,51 +23,55 @@
 
 #include <array>
 #include <cmath>
+#include <complex>
 #include <iostream>
 
 namespace shirose {
 
+/// @brief Computes roots of a cubic equation by using Cardano's formula.
+/// @param[in] a Array of coefficients of a cubic equation
+/// @returns Array of roots of a cubic equation
+///
+/// The cubic equation takes the form of:
+/// \f[
+///   x^3 + a[0] x^2 + a[1] x + a[2] = 0.
+/// \f]
 template <typename T>
-std::pair<std::array<T, 3>, int> roots(const std::array<T, 3>& p) noexcept {
-  using std::abs;
-  using std::acos;
-  using std::cos;
-  using std::isinf;
+std::array<std::complex<T>, 3> roots(const std::array<T, 3>& a) noexcept {
+  // Depressed cubic equation:
+  // x^3 + 3px + 2q = 0
+  const auto p = (3 * a[1] - a[0] * a[0]) / 9;
+  const auto q = (27 * a[2] + a[0] * (2 * a[0] * a[0] - 9 * a[1])) / 54;
+  // Discriminant of the cubic equation
+  const auto disc = p * p * p + q * q;
+
   using std::pow;
   using std::sqrt;
 
-  const auto b = p[0];
-  const auto c = p[1];
-  const auto d = p[2];
+  const auto s = sqrt(std::complex<T>(disc, 0));
+  const auto u1 = pow(-q + s, 1.0 / 3.0);
+  const auto u2 = pow(-q - s, 1.0 / 3.0);
 
-  const auto q = (b * b - 3 * c) / 9;
-  const auto r = (b * (2 * b * b - 9 * c) + 27 * d) / 54;
-  const auto s = q * q * q - r * r;
+  constexpr auto sqrt3 = 1.7320508075688772935;
+  // The primitive cube root of unity
+  const auto w1 = std::complex<T>(-0.5, sqrt3 / 2.0);
+  const auto w2 = std::complex<T>(-0.5, -sqrt3 / 2.0);
 
-  if (s > 0) {
-    const auto sqrt_q = sqrt(q);
-    const auto theta = acos(r / pow(q, 1.5));
+  // Roots based on Cardano's formula
+  const auto x1 = u1 + u2 - a[0] / 3;
+  const auto x2 = w1 * u1 + w2 * u2 - a[0] / 3;
+  const auto x3 = w2 * u1 + w1 * u2 - a[0] / 3;
 
-    const auto x1 = -2 * sqrt_q * cos(theta / 3) - b / 3;
-    const auto x2 = -2 * sqrt_q * cos((theta + 2 * M_PI) / 3) - b / 3;
-    const auto x3 = -2 * sqrt_q * cos((theta + 4 * M_PI) / 3) - b / 3;
+  return {x1, x2, x3};
+}
 
-    return {{x1, x2, x3}, 3};
-  } else if (s == 0) {
-    if (r == 0) {
-      return {{-b / 3, 0, 0}, 1};
-    } else {
-      const auto r13 = r >= 0 ? -pow(r, 1.0 / 3.0) : pow(-r, 1.0 / 3.0);
-      const auto x1 = -b / 3 + 2 * r13;
-      const auto x2 = -b / 3 - r13;
-      return {{x1, x2, 0.0}, 2};
-    }
-  } else {
-    const auto tmp1 = pow(sqrt(-s) + abs(r), 1.0 / 3.0);
-    const auto tmp2 = tmp1 + q / tmp1;
-    const auto x1 = r > 0 ? -tmp2 - b / 3 : tmp2 - b / 3;
-    return {{x1, 0, 0}, 1};
-  }
+template <typename T>
+T discriminant(const std::array<T, 3>& a) noexcept {
+  // Depressed cubic equation:
+  // x^3 + 3px + 2q = 0
+  const auto p = (3 * a[1] - a[0] * a[0]) / 9;
+  const auto q = (27 * a[2] + a[0] * (2 * a[0] * a[0] - 9 * a[1])) / 54;
+  return p * p * p + q * q;
 }
 
 }  // namespace shirose
