@@ -21,9 +21,9 @@
 #ifndef SHIROSE_ROOTS_HPP
 #define SHIROSE_ROOTS_HPP
 
-#include <array>
-#include <cmath>
-#include <complex>
+#include <array>    // std::array
+#include <cmath>    // std::sqrt, std::pow
+#include <complex>  // std::complex
 
 namespace shirose {
 
