@@ -9,3 +9,7 @@ target_link_libraries(roots_test
     GTest::GTest
     GTest::Main
   )
+add_test(
+  NAME roots_test
+  COMMAND roots_test
+  )
