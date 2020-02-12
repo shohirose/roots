@@ -18,8 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef SHIROSE_ROOTS_HPP
-#define SHIROSE_ROOTS_HPP
+#pragma once
 
 #include <array>
 #include <cmath>
@@ -120,5 +119,3 @@ inline T discriminant(const std::array<T, 3>& a) noexcept {
 }
 
 }  // namespace shirose
-
-#endif  // SHIROSE_ROOTS_HPP
