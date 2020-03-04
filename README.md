@@ -15,7 +15,7 @@ using coeffs_t = quadratic_equation_t::coeffs_t;
 // x^2 + a[0] x + a[1] = 0
 const coeffs_t a = {1.0, 2.0};
 const auto eq = quadratic_equation_t(a);
-const auto d = eq.discritimant();
+const auto d = eq.discriminant();
 const auto x = eq.roots();
 ```
 
@@ -30,6 +30,6 @@ using coeffs_t = cubic_equation_t::coeffs_t;
 // x^3 + a[0] x^2 + a[1] x + a[2] = 0
 const coeffs_t a = {1.0, 2.0, 3.0};
 const auto eq = cubic_equation_t(a);
-const auto d = eq.discritimant();
+const auto d = eq.discriminant();
 const auto x = eq.roots();
 ```
