@@ -1,14 +1,17 @@
-#include "shirose/roots.hpp"
+#include "roots/roots.hpp"
 #include <gtest/gtest.h>
-#include <cmath>  // std::sqrt
 
-using shirose::roots;
+TEST(RootsTest, QuadraticEquationTest) {
+  using quadratic_equation_t = roots::quadratic_equation<double>;
+  using coeffs_t = quadratic_equation_t::coeffs_t;
 
-TEST(RootsTest, QuadraticEqRootsTest) {
   // Only one real root
   {
-    const std::array<double, 2> a = {-2, 1};
-    const auto x = roots(a);
+    const coeffs_t a = {-2, 1};
+    const auto eq = quadratic_equation_t(a);
+    const auto x = eq.roots();
+
+    EXPECT_EQ(eq.num_of_real_roots(), 1);
 
     EXPECT_NEAR(x[0].imag(), 0.0, 1e-10);
     EXPECT_NEAR(x[1].imag(), 0.0, 1e-10);
@@ -19,8 +22,11 @@ TEST(RootsTest, QuadraticEqRootsTest) {
 
   // Two real roots
   {
-    const std::array<double, 2> a = {-3, 2};
-    const auto x = roots(a);
+    const coeffs_t a = {-3, 2};
+    const auto eq = quadratic_equation_t(a);
+    const auto x = eq.roots();
+
+    EXPECT_EQ(eq.num_of_real_roots(), 2);
 
     EXPECT_NEAR(x[0].imag(), 0.0, 1e-10);
     EXPECT_NEAR(x[1].imag(), 0.0, 1e-10);
@@ -31,8 +37,11 @@ TEST(RootsTest, QuadraticEqRootsTest) {
 
   // Two complex roots
   {
-    const std::array<double, 2> a = {1, 1};
-    const auto x = roots(a);
+    const coeffs_t a = {1, 1};
+    const auto eq = quadratic_equation_t(a);
+    const auto x = eq.roots();
+
+    EXPECT_EQ(eq.num_of_real_roots(), 0);
 
     EXPECT_NEAR(x[0].imag(), std::sqrt(3.0) / 2, 1e-10);
     EXPECT_NEAR(x[1].imag(), -std::sqrt(3.0) / 2, 1e-10);
@@ -42,11 +51,17 @@ TEST(RootsTest, QuadraticEqRootsTest) {
   }
 }
 
-TEST(RootsTest, CubicEqRootsTest) {
+TEST(RootsTest, CubicEquationTest) {
+  using cubic_equation_t = roots::cubic_equation<double>;
+  using coeffs_t = cubic_equation_t::coeffs_t;
+
   // Only one real root
   {
-    const std::array<double, 3> a = {-3.0, 3.0, -1.0};
-    const auto x = roots(a);
+    const coeffs_t a = {-3.0, 3.0, -1.0};
+    const auto eq = cubic_equation_t(a);
+    const auto x = eq.roots();
+
+    EXPECT_EQ(eq.num_of_real_roots(), 1);
 
     EXPECT_DOUBLE_EQ(x[0].imag(), 0);
     EXPECT_DOUBLE_EQ(x[1].imag(), 0);
@@ -59,8 +74,11 @@ TEST(RootsTest, CubicEqRootsTest) {
 
   // Three real roots
   {
-    const std::array<double, 3> a = {0.0, -1.0, 0.0};
-    const auto x = roots(a);
+    const coeffs_t a = {0.0, -1.0, 0.0};
+    const auto eq = cubic_equation_t(a);
+    const auto x = eq.roots();
+
+    EXPECT_EQ(eq.num_of_real_roots(), 3);
 
     EXPECT_DOUBLE_EQ(x[0].imag(), 0);
     EXPECT_DOUBLE_EQ(x[1].imag(), 0);
@@ -73,8 +91,11 @@ TEST(RootsTest, CubicEqRootsTest) {
 
   // Two real roots
   {
-    const std::array<double, 3> a = {-2.0, 1.0, 0.0};
-    const auto x = roots(a);
+    const coeffs_t a = {-2.0, 1.0, 0.0};
+    const auto eq = cubic_equation_t(a);
+    const auto x = eq.roots();
+
+    EXPECT_EQ(eq.num_of_real_roots(), 2);
 
     EXPECT_DOUBLE_EQ(x[0].imag(), 0);
     EXPECT_DOUBLE_EQ(x[1].imag(), 0);
@@ -87,8 +108,11 @@ TEST(RootsTest, CubicEqRootsTest) {
 
   // One real root and two complex roots
   {
-    const std::array<double, 3> a = {0, 0, -1};
-    const auto x = roots(a);
+    const coeffs_t a = {0, 0, -1};
+    const auto eq = cubic_equation_t(a);
+    const auto x = eq.roots();
+
+    EXPECT_EQ(eq.num_of_real_roots(), 1);
 
     EXPECT_NEAR(x[0].imag(), 0, 1e-10);
     EXPECT_NEAR(x[1].imag(), 0.8660254037, 1e-10);
