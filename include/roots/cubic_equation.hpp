@@ -60,13 +60,8 @@ class cubic_equation {
     const auto d = this->discriminant();
     if (d < 0) {
       return 1;
-    } else if (fabs(d) < tolerance) {
-      if (fabs(this->p()) < tolerance) {
-        /// 0 is a triple root of the cubic equation.
-        return 1;
-      } else {
-        return 2;
-      }
+    } else if (d < tolerance) {
+      return (fabs(this->p()) < tolerance) ? 1 : 2;
     } else {
       return 3;
     }
@@ -109,7 +104,7 @@ class cubic_equation {
     using std::pow;
     using std::sqrt;
 
-    const auto s = sqrt(complex<T>(d, 0));
+    const auto s = sqrt(complex<value_t>(d, 0));
     const auto u1 = pow(-q + s, 1.0 / 3.0);
     const auto u2 = pow(-q - s, 1.0 / 3.0);
 

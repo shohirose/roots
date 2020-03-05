@@ -22,7 +22,7 @@
 #define ROOTS_QUADRATIC_EQUATION_HPP
 
 #include <array>    // std::array
-#include <cmath>    // std::sqrt, std::fabs
+#include <cmath>    // std::sqrt
 #include <complex>  // std::complex
 
 namespace roots {
@@ -57,10 +57,9 @@ class quadratic_equation {
   int num_of_real_roots() const noexcept {
     constexpr double tolerance = 1e-10;
     const auto d = this->discriminant();
-    using std::fabs;
     if (d < 0) {
       return 0;
-    } else if (fabs(d) < tolerance) {
+    } else if (d < tolerance) {
       return 1;
     } else {
       return 2;
@@ -84,7 +83,7 @@ class quadratic_equation {
     using std::complex;
     using std::sqrt;
 
-    const auto s = sqrt(complex<T>(d, 0));
+    const auto s = sqrt(complex<value_t>(d, 0));
     const auto x1 = (-a[0] + s) / 2.0;
     const auto x2 = (-a[0] - s) / 2.0;
 
