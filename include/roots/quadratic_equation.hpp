@@ -34,7 +34,8 @@ class quadratic_equation {
  public:
   using value_t = T;
   using coeffs_t = std::array<value_t, 2>;
-  using roots_t = std::array<std::complex<value_t>, 2>;
+  using complex_t = std::complex<value_t>;
+  using roots_t = std::array<complex_t, 2>;
 
   quadratic_equation() = default;
 
@@ -83,7 +84,7 @@ class quadratic_equation {
     using std::complex;
     using std::sqrt;
 
-    const auto s = sqrt(complex<value_t>(d, 0));
+    const auto s = sqrt(complex_t(d, 0));
     const auto x1 = (-a[0] + s) / 2.0;
     const auto x2 = (-a[0] - s) / 2.0;
 

@@ -34,7 +34,8 @@ class cubic_equation {
  public:
   using value_t = T;
   using coeffs_t = std::array<value_t, 3>;
-  using roots_t = std::array<std::complex<value_t>, 3>;
+  using complex_t = std::complex<value_t>;
+  using roots_t = std::array<complex_t, 3>;
 
   cubic_equation() = default;
 
@@ -100,18 +101,17 @@ class cubic_equation {
     const auto q = (27 * a[2] + a[0] * (2 * a[0] * a[0] - 9 * a[1])) / 54;
     const auto d = p * p * p + q * q;
 
-    using std::complex;
     using std::pow;
     using std::sqrt;
 
-    const auto s = sqrt(complex<value_t>(d, 0));
+    const auto s = sqrt(complex_t(d, 0));
     const auto u1 = pow(-q + s, 1.0 / 3.0);
     const auto u2 = pow(-q - s, 1.0 / 3.0);
 
     constexpr double sqrt3 = 1.7320508075688772935;
     // The primitive cube roots of unity
-    const auto w1 = complex<T>(-0.5, sqrt3 / 2);
-    const auto w2 = complex<T>(-0.5, -sqrt3 / 2);
+    const auto w1 = complex_t{-0.5, sqrt3 / 2.0};
+    const auto w2 = complex_t{-0.5, -sqrt3 / 2.0};
 
     // Roots based on Cardano's formula
     const auto x1 = u1 + u2 - a[0] / 3;
