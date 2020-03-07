@@ -1,3 +1,5 @@
+// MIT License
+//
 // Copyright 2020 Sho Hirose
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -79,11 +81,13 @@ class quadratic_equation {
   /// @brief Computes roots.
   /// @param[in] a Coefficients of the quadratic equation.
   static result_t calc_roots(const coeffs_t& a) noexcept {
+    // Discriminant
     const auto d = a[0] * a[0] - 4 * a[1];
 
     using std::complex;
     using std::sqrt;
 
+    // Roots
     const auto s = sqrt(complex_t(d, 0));
     const auto x1 = (-a[0] + s) / 2.0;
     const auto x2 = (-a[0] - s) / 2.0;

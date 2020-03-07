@@ -1,3 +1,5 @@
+// MIT License
+//
 // Copyright 2020 Sho Hirose
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -96,9 +98,13 @@ class cubic_equation {
 
   using result_t = result;
 
+  /// @brief Computes roots of a cubic equation.
+  /// @param[in] a Coefficients of the cubic equation
   static result_t calc_roots(const coeffs_t& a) noexcept {
+    /// Coefficients of the depressed cubic equation.
     const auto p = (3 * a[1] - a[0] * a[0]) / 9;
     const auto q = (27 * a[2] + a[0] * (2 * a[0] * a[0] - 9 * a[1])) / 54;
+    /// Discriminant
     const auto d = p * p * p + q * q;
 
     using std::pow;
@@ -113,7 +119,7 @@ class cubic_equation {
     const auto w1 = complex_t{-0.5, sqrt3 / 2.0};
     const auto w2 = complex_t{-0.5, -sqrt3 / 2.0};
 
-    // Roots based on Cardano's formula
+    // Roots calculated by using the Cardano's formula
     const auto x1 = u1 + u2 - a[0] / 3;
     const auto x2 = w1 * u1 + w2 * u2 - a[0] / 3;
     const auto x3 = w2 * u1 + w1 * u2 - a[0] / 3;
