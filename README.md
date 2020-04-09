@@ -1,10 +1,11 @@
 # roots
+[![Build Status](https://travis-ci.com/shohirose/roots.svg?branch=master)](https://travis-ci.com/shohirose/roots) [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
 
 `roots` is a header-only library in C++ to compute roots of polynomial equations. Currently, roots of quadratic and cubic equations can be computed.
 
-# Example
+## Example
 
-## Quadratic equation
+### Quadratic equation
 
 Discriminant and roots of a quadratic equation can be computed in the following mannter:
 
@@ -19,7 +20,7 @@ const auto d = eq.discriminant();
 const auto x = eq.roots();
 ```
 
-## Cubic equation
+### Cubic equation
 
 Discriminant and roots of a cubic equation can be computed in the following mannter:
 
