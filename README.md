@@ -9,7 +9,7 @@
 
 Discriminant and roots of a quadratic equation can be computed in the following mannter:
 
-```cpp:quadratic_equation
+```cpp
 using quadratic_equation_t = roots::quadratic_equation<double>;
 using coeffs_t = quadratic_equation_t::coeffs_t;
 
@@ -24,7 +24,7 @@ const auto x = eq.roots();
 
 Discriminant and roots of a cubic equation can be computed in the following mannter:
 
-```cpp:cubic_equation
+```cpp
 using cubic_equation_t = roots::cubic_equation<double>;
 using coeffs_t = cubic_equation_t::coeffs_t;
 
