@@ -40,11 +40,16 @@ class quadratic_equation {
   using roots_t = std::array<complex_t, 2>;
 
   quadratic_equation() = default;
+  quadratic_equation(const quadratic_equation&) = default;
+  quadratic_equation(quadratic_equation&&) = default;
 
   /// @brief Computes roots.
   /// @param[in] a Coefficients of the equation.
   explicit quadratic_equation(const coeffs_t& a) noexcept
       : result_{calc_roots(a)} {}
+
+  quadratic_equation& operator=(const quadratic_equation&) = default;
+  quadratic_equation& operator=(quadratic_equation&&) = default;
 
   /// @brief Computes roots.
   /// @param[in] a Coefficients of the equation.

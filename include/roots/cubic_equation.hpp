@@ -40,11 +40,16 @@ class cubic_equation {
   using roots_t = std::array<complex_t, 3>;
 
   cubic_equation() = default;
+  cubic_equation(const cubic_equation&) = default;
+  cubic_equation(cubic_equation&&) = default;
 
   /// @brief Computes roots.
   /// @param[in] a Coefficients of the equation.
   explicit cubic_equation(const coeffs_t& a) noexcept
       : result_{calc_roots(a)} {}
+
+  cubic_equation& operator=(const cubic_equation&) = default;
+  cubic_equation& operator=(cubic_equation&&) = default;
 
   /// @brief Computes roots.
   /// @param[in] a Coefficients of the equation.
