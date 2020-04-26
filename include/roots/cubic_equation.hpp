@@ -26,6 +26,7 @@
 #include <array>    // std::array
 #include <cmath>    // std::sqrt, std::pow, std::fabs
 #include <complex>  // std::complex
+#include <vector>   // std::vector
 
 namespace roots {
 
@@ -134,6 +135,20 @@ class cubic_equation {
 
   result_t result_;
 };
+
+template <typename T>
+std::vector<T> real_roots(const cubic_equation<T>& eq) {
+  std::vector<T> xs;
+  xs.reserve(3);
+  constexpr double tolerance = 1e-10;
+  using std::fabs;
+  for (auto&& x : eq.roots()) {
+    if (fabs(x.imag()) < tolerance) {
+      xs.push_back(x);
+    }
+  }
+  return xs;
+}
 
 }  // namespace roots
 
