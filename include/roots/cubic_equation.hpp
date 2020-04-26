@@ -85,7 +85,7 @@ class cubic_equation {
   /// A cubic equation
   /// \f[ x^3 + a_0 x^2 + a_1 x + a_2 = 0 \f]
   /// can be converted into the depressed cubic equation:
-  /// \f[ y^3 + py + q = 0 \f]
+  /// \f[ y^3 + \frac{p}{3} y + \frac{q}{2} = 0 \f]
   /// where \f$ y \f$, \f$ p \f$, and \f$ q \f$ are defined by
   /// \f[
   ///     y = x + \frac{a_0}{3}
